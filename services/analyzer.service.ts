@@ -1,10 +1,17 @@
 import { prisma } from "@/lib/prisma";
 
 export async function analyzeIngredients(input: string) {
+  const aliases: Record<string, string> = {
+    "vitamin c": "ascorbic acid",
+    "vitamin e": "tocopherol",
+    "pro vitamin b5": "panthenol",
+  };
+
   const ingredientNames = input
     .split(",")
     .map((item) => item.trim().toLowerCase())
-    .filter((item) => item.length > 0);
+    .filter((item) => item.length > 0)
+    .map((name) => aliases[name] || name);
 
   const allIngredients = await prisma.ingredient.findMany();
 
