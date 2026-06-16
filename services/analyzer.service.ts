@@ -124,29 +124,46 @@ export async function analyzeIngredients(input: string) {
   ];
 
   const categoryBreakdown = matchedIngredients.reduce(
-  (acc, ingredient) => {
-    const category = ingredient.category || "Unknown";
+    (acc, ingredient) => {
+      const category = ingredient.category || "Unknown";
 
-    acc[category] = (acc[category] || 0) + 1;
+      acc[category] = (acc[category] || 0) + 1;
 
-    return acc;
-  },
-  {} as Record<string, number>
-);
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+  const report = `
+This product has a safety score of ${Math.round(averageScore)} (${grade}).
+
+Risk Level: ${riskLevel}.
+
+Recommended for: ${skinType}.
+
+Key Benefits: ${
+    benefits.length > 0 ? benefits.join(", ") : "None detected"
+  }.
+
+Potential Risks: ${
+    risks.length > 0 ? risks.join(", ") : "No significant risks detected"
+  }.
+`;
 
   return {
-  score: Math.round(averageScore),
-  grade,
-  riskLevel,
-  skinType,
-  summary,
-  benefits,
-  risks,
-  categories,
-  categoryBreakdown,
-  matchedIngredients,
-  foundCount: matchedIngredients.length,
-  totalCount: ingredientNames.length,
-  unknownIngredients,
-};
+    score: Math.round(averageScore),
+    grade,
+    riskLevel,
+    skinType,
+    summary,
+    report,
+    benefits,
+    risks,
+    categories,
+    categoryBreakdown,
+    matchedIngredients,
+    foundCount: matchedIngredients.length,
+    totalCount: ingredientNames.length,
+    unknownIngredients,
+  };
 }
