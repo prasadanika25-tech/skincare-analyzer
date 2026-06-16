@@ -83,11 +83,31 @@ export async function analyzeIngredients(input: string) {
     skinType = "Sensitive Skin";
   }
 
+  const benefits = [
+    ...new Set(
+      matchedIngredients.map(
+        (ingredient) => ingredient.benefits
+      )
+    ),
+  ];
+
+  const risks = [
+    ...new Set(
+      matchedIngredients.map(
+        (ingredient) => ingredient.risks
+      )
+    ),
+  ].filter(
+    (risk) => risk.toLowerCase() !== "none"
+  );
+
   return {
     score: Math.round(averageScore),
     riskLevel,
     skinType,
     summary,
+    benefits,
+    risks,
     matchedIngredients,
     foundCount: matchedIngredients.length,
     totalCount: ingredientNames.length,
