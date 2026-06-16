@@ -54,9 +54,39 @@ export async function analyzeIngredients(input: string) {
       "This product contains ingredients that may increase the risk of irritation.";
   }
 
+  let skinType = "All Skin Types";
+
+  const ingredientText = matchedIngredients
+    .map((ingredient) => ingredient.name.toLowerCase())
+    .join(" ");
+
+  if (
+    ingredientText.includes("salicylic acid") ||
+    ingredientText.includes("niacinamide")
+  ) {
+    skinType = "Oily Skin";
+  }
+
+  if (
+    ingredientText.includes("glycerin") ||
+    ingredientText.includes("hyaluronic acid") ||
+    ingredientText.includes("ceramides")
+  ) {
+    skinType = "Dry Skin";
+  }
+
+  if (
+    ingredientText.includes("panthenol") ||
+    ingredientText.includes("allantoin") ||
+    ingredientText.includes("aloe vera")
+  ) {
+    skinType = "Sensitive Skin";
+  }
+
   return {
     score: Math.round(averageScore),
     riskLevel,
+    skinType,
     summary,
     matchedIngredients,
     foundCount: matchedIngredients.length,
