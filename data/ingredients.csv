@@ -1,7 +1,7 @@
 name,safetyScore,benefits,risks,category
 Niacinamide,95,Barrier Support,None,Active
 Salicylic Acid,85,Acne Treatment,Dryness,Active
-Hyaluronic Acid,98,Hydration,None,Hydrator
+Hyaluronic Acid,98,Hydration,None,Humectant
 Vitamin C,90,Brightening,Irritation,Active
 Ceramides,99,Barrier Repair,None,Barrier
 Fragrance,40,Pleasant Smell,Irritation,Additive
@@ -9,3 +9,23 @@ Alcohol Denat,45,Quick Drying,Dryness,Solvent
 Glycerin,98,Hydration,None,Humectant
 Retinol,75,Anti Aging,Irritation,Active
 Zinc Oxide,95,Sun Protection,None,UV Filter
+Panthenol,98,Soothing,None,Humectant
+Squalane,99,Moisturizing,None,Emollient
+Titanium Dioxide,94,UV Protection,None,UV Filter
+Azelaic Acid,88,Brightening,Mild Irritation,Active
+Bakuchiol,90,Anti Aging,None,Active
+Allantoin,99,Soothing,None,Soothing Agent
+Green Tea Extract,97,Antioxidant,None,Botanical
+Aloe Vera,98,Calming,None,Botanical
+Shea Butter,96,Moisturizing,None,Emollient
+Caffeine,89,Depuffing,None,Active
+Lactic Acid,82,Exfoliation,Sensitivity,Active
+Glycolic Acid,80,Exfoliation,Irritation,Active
+Mandelic Acid,84,Exfoliation,Mild Irritation,Active
+Arbutin,90,Brightening,None,Active
+Tranexamic Acid,92,Pigmentation Control,None,Active
+Phenoxyethanol,70,Preservative,Irritation,Preservative
+Caprylyl Glycol,95,Moisturizing,None,Preservative
+Tocopherol,97,Antioxidant,None,Vitamin
+Urea,92,Hydration,None,Humectant
+Beta Glucan,97,Soothing,None,Humectant

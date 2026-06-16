@@ -12,8 +12,12 @@ async function main() {
     .on("data", (data) => results.push(data))
     .on("end", async () => {
       for (const ingredient of results) {
-        await prisma.ingredient.create({
-          data: {
+        await prisma.ingredient.upsert({
+          where: {
+            name: ingredient.name,
+          },
+          update: {},
+          create: {
             name: ingredient.name,
             safetyScore: Number(ingredient.safetyScore),
             benefits: ingredient.benefits,
@@ -23,9 +27,13 @@ async function main() {
         });
       }
 
-      console.log("Ingredients inserted!");
+      console.log(`✅ ${results.length} ingredients processed`);
       await prisma.$disconnect();
     });
 }
 
-main();
+main().catch(async (error) => {
+  console.error(error);
+  await prisma.$disconnect();
+  process.exit(1);
+});
