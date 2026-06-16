@@ -41,6 +41,20 @@ export async function analyzeIngredients(input: string) {
     riskLevel = "Moderate";
   }
 
+  let grade = "F";
+
+  if (averageScore >= 95) {
+    grade = "A+";
+  } else if (averageScore >= 90) {
+    grade = "A";
+  } else if (averageScore >= 80) {
+    grade = "B";
+  } else if (averageScore >= 70) {
+    grade = "C";
+  } else if (averageScore >= 60) {
+    grade = "D";
+  }
+
   let summary = "";
 
   if (riskLevel === "Low") {
@@ -101,16 +115,38 @@ export async function analyzeIngredients(input: string) {
     (risk) => risk.toLowerCase() !== "none"
   );
 
+  const categories = [
+    ...new Set(
+      matchedIngredients.map(
+        (ingredient) => ingredient.category
+      )
+    ),
+  ];
+
+  const categoryBreakdown = matchedIngredients.reduce(
+  (acc, ingredient) => {
+    const category = ingredient.category || "Unknown";
+
+    acc[category] = (acc[category] || 0) + 1;
+
+    return acc;
+  },
+  {} as Record<string, number>
+);
+
   return {
-    score: Math.round(averageScore),
-    riskLevel,
-    skinType,
-    summary,
-    benefits,
-    risks,
-    matchedIngredients,
-    foundCount: matchedIngredients.length,
-    totalCount: ingredientNames.length,
-    unknownIngredients,
-  };
+  score: Math.round(averageScore),
+  grade,
+  riskLevel,
+  skinType,
+  summary,
+  benefits,
+  risks,
+  categories,
+  categoryBreakdown,
+  matchedIngredients,
+  foundCount: matchedIngredients.length,
+  totalCount: ingredientNames.length,
+  unknownIngredients,
+};
 }
